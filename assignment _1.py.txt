@@ -1,0 +1,34 @@
+# Importing the necessary libraries 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import pdb
+import xarray as xr
+
+# Open the netCDF dataset 
+dset = xr.open_dataset(r"C:\Users\Mesha\geo_env\Course_Data\SRTMGL1_NC.003_Data\N21E039.SRTMGL1_NC.nc", engine="netcdf4")
+
+# Set a breakpoint to explore variables
+pdb.set_trace()
+
+# Check available variables
+print(dset.variables)
+
+# Another breakpoint to allow further inspection
+pdb.set_trace()
+
+# Extract elevation data
+DEM = np.array(dset['SRTMGL1_DEM'])
+
+# Close the dataset
+dset.close()
+
+# Print the shape of DEM array
+print("DEM shape:", DEM.shape)
+
+# Visualize the data
+plt.imshow(DEM, cmap="terrain")
+cbar = plt.colorbar()
+cbar.set_label("Elevation (m asl)")
+#Save the Figure
+plt.savefig('assignment_1.png', dpi=300)
